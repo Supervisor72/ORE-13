@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foglio di Monitoraggio Vendite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: left;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .save-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .save-btn:hover {
+            background-color: #45a049;
+        }
+        .print-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        .print-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>FOGLIO DI MONITORAGGIO GIORNALIERO/MENSILE</h1>
+    
+    <h2>INDICATORI DI VENDITA</h2>
+    <table>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>VALORE</th>
+        </tr>
+        <tr>
+            <td>VENDUTO</td>
+            <td><input type="text" id="venduto"></td>
+        </tr>
+        <tr>
+            <td>CONTROCIFRA GIORNO</td>
+            <td><input type="text" id="controcifra"></td>
+        </tr>
+    </table>
+    
+    <h2>PROMOZIONI</h2>
+    <table>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>VALORE</th>
+        </tr>
+        <tr>
+            <td>PROMO 3 X 2</td>
+            <td><input type="text" id="promo3x2"></td>
+        </tr>
+        <tr>
+            <td>PROMO -50%</td>
+            <td><input type="text" id="promo50"></td>
+        </tr>
+        <tr>
+            <td>PROMO ALTERNATIVE GIORNO</td>
+            <td><input type="text" id="promoAlt"></td>
+        </tr>
+        <tr>
+            <td>TASSO ZERO</td>
+            <td><input type="text" id="tassoZero"></td>
+        </tr>
+    </table>
+    
+    <h2>PERFORMANCE E GARANZIE</h2>
+    <table>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>VALORE</th>
+        </tr>
+        <tr>
+            <td>POS CLASSIFICA ATTACH MESE</td>
+            <td><input type="text" id="posAttach"></td>
+        </tr>
+        <tr>
+            <td>INCIDENZA GARANZIE MESE</td>
+            <td><input type="text" id="incidenzaGaranzie"></td>
+        </tr>
+        <tr>
+            <td>IPHONE / GARANZIE</td>
+            <td><input type="text" id="iphoneGaranzie"></td>
+        </tr>
+        <tr>
+            <td>APPLE PC / GARANZIE</td>
+            <td><input type="text" id="applePcGaranzie"></td>
+        </tr>
+    </table>
+    
+    <h2>ATTIVAZIONI TELEFONIA</h2>
+    <table>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>VALORE</th>
+        </tr>
+        <tr>
+            <td>ATTIVAZIONI HO</td>
+            <td><input type="text" id="attivazioniHo"></td>
+        </tr>
+        <tr>
+            <td>ATTIVAZIONI VERY MOBILE</td>
+            <td><input type="text" id="attivazioniVery"></td>
+        </tr>
+    </table>
+    
+    <h2>CATEGORIE PRODOTTI</h2>
+    <table>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>VALORE</th>
+        </tr>
+        <tr>
+            <td>OLED</td>
+            <td><input type="text" id="oled"></td>
+        </tr>
+        <tr>
+            <td>AEG BIANCO</td>
+            <td><input type="text" id="aegBianco"></td>
+        </tr>
+        <tr>
+            <td>ASCIUGATRICI</td>
+            <td><input type="text" id="asciugatrici"></td>
+        </tr>
+        <tr>
+            <td>SCOPE NO FILI</td>
+            <td><input type="text" id="scopeNoFili"></td>
+        </tr>
+        <tr>
+            <td>I-ROBOT</td>
+            <td><input type="text" id="iRobot"></td>
+        </tr>
+        <tr>
+            <td>CAFFE' AUTOMATICHE</td>
+            <td><input type="text" id="caffeAutomatiche"></td>
+        </tr>
+    </table>
+    
+    <button class="save-btn" onclick="saveData()">Salva</button>
+    <button class="print-btn" onclick="window.print()">Stampa</button>
+    
+    <script>
+        function saveData() {
+            // In un'applicazione reale, qui ci sarebbe il codice per salvare i dati
+            alert("Dati salvati con successo!");
+        }
+    </script>
+</body>
+</html>
