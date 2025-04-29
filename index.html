@@ -1,197 +1,296 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Foglio di Monitoraggio Vendite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report PDV</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
         h1 {
             text-align: center;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #3498db;
-            border-bottom: 1px solid #3498db;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+            color: #0056b3;
+            font-size: 1.5rem;
             margin-bottom: 20px;
         }
-        th, td {
+        .header {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-            text-align: left;
-        }
-        input[type=text] {
-            width: 100%;
-            padding: 8px;
+            border-radius: 4px;
+            font-size: 16px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
-        .save-btn {
-            background-color: #4CAF50;
+        .client-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .client-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .client-number {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .remove-btn {
+            background-color: #ff4d4d;
             color: white;
-            padding: 10px 15px;
             border: none;
             border-radius: 4px;
+            padding: 5px 10px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
         }
-        .save-btn:hover {
-            background-color: #45a049;
-        }
-        .print-btn {
-            background-color: #3498db;
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
             color: white;
-            padding: 10px 15px;
             border: none;
             border-radius: 4px;
-            cursor: pointer;
             font-size: 16px;
-            margin-top: 20px;
-            margin-left: 10px;
+            cursor: pointer;
+            margin: 15px 0;
+            text-align: center;
         }
-        .print-btn:hover {
-            background-color: #2980b9;
+        .btn-secondary {
+            background-color: #28a745;
+        }
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input {
+            width: auto;
+            margin-right: 5px;
+        }
+        #reportDate {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-    <h1>FOGLIO DI MONITORAGGIO GIORNALIERO/MENSILE</h1>
-    
-    <h2>INDICATORI DI VENDITA</h2>
-    <table>
-        <tr>
-            <th>CATEGORIA</th>
-            <th>VALORE</th>
-        </tr>
-        <tr>
-            <td>VENDUTO</td>
-            <td><input type="text" id="venduto"></td>
-        </tr>
-        <tr>
-            <td>CONTROCIFRA GIORNO</td>
-            <td><input type="text" id="controcifra"></td>
-        </tr>
-    </table>
-    
-    <h2>PROMOZIONI</h2>
-    <table>
-        <tr>
-            <th>CATEGORIA</th>
-            <th>VALORE</th>
-        </tr>
-        <tr>
-            <td>PROMO 3 X 2</td>
-            <td><input type="text" id="promo3x2"></td>
-        </tr>
-        <tr>
-            <td>PROMO -50%</td>
-            <td><input type="text" id="promo50"></td>
-        </tr>
-        <tr>
-            <td>PROMO ALTERNATIVE GIORNO</td>
-            <td><input type="text" id="promoAlt"></td>
-        </tr>
-        <tr>
-            <td>TASSO ZERO</td>
-            <td><input type="text" id="tassoZero"></td>
-        </tr>
-    </table>
-    
-    <h2>PERFORMANCE E GARANZIE</h2>
-    <table>
-        <tr>
-            <th>CATEGORIA</th>
-            <th>VALORE</th>
-        </tr>
-        <tr>
-            <td>POS CLASSIFICA ATTACH MESE</td>
-            <td><input type="text" id="posAttach"></td>
-        </tr>
-        <tr>
-            <td>INCIDENZA GARANZIE MESE</td>
-            <td><input type="text" id="incidenzaGaranzie"></td>
-        </tr>
-        <tr>
-            <td>IPHONE / GARANZIE</td>
-            <td><input type="text" id="iphoneGaranzie"></td>
-        </tr>
-        <tr>
-            <td>APPLE PC / GARANZIE</td>
-            <td><input type="text" id="applePcGaranzie"></td>
-        </tr>
-    </table>
-    
-    <h2>ATTIVAZIONI TELEFONIA</h2>
-    <table>
-        <tr>
-            <th>CATEGORIA</th>
-            <th>VALORE</th>
-        </tr>
-        <tr>
-            <td>ATTIVAZIONI HO</td>
-            <td><input type="text" id="attivazioniHo"></td>
-        </tr>
-        <tr>
-            <td>ATTIVAZIONI VERY MOBILE</td>
-            <td><input type="text" id="attivazioniVery"></td>
-        </tr>
-    </table>
-    
-    <h2>CATEGORIE PRODOTTI</h2>
-    <table>
-        <tr>
-            <th>CATEGORIA</th>
-            <th>VALORE</th>
-        </tr>
-        <tr>
-            <td>OLED</td>
-            <td><input type="text" id="oled"></td>
-        </tr>
-        <tr>
-            <td>AEG BIANCO</td>
-            <td><input type="text" id="aegBianco"></td>
-        </tr>
-        <tr>
-            <td>ASCIUGATRICI</td>
-            <td><input type="text" id="asciugatrici"></td>
-        </tr>
-        <tr>
-            <td>SCOPE NO FILI</td>
-            <td><input type="text" id="scopeNoFili"></td>
-        </tr>
-        <tr>
-            <td>I-ROBOT</td>
-            <td><input type="text" id="iRobot"></td>
-        </tr>
-        <tr>
-            <td>CAFFE' AUTOMATICHE</td>
-            <td><input type="text" id="caffeAutomatiche"></td>
-        </tr>
-    </table>
-    
-    <button class="save-btn" onclick="saveData()">Salva</button>
-    <button class="print-btn" onclick="window.print()">Stampa</button>
-    
+    <div class="container">
+        <h1>REPORT PDV</h1>
+        <div id="reportDate"></div>
+        
+        <div class="header">
+            <div class="form-group">
+                <label for="colleagueName">PUNTO VENDITA:</label>
+                <select id="colleagueName">
+                    <option value="">-- Seleziona punto vendita --</option>
+                    <option value="FANO">FANO</option>
+                    <option value="MONSANO">MONSANO</option>
+                    <option value="OSIMO">OSIMO</option>
+                    <option value="MACERATA">MACERATA</option>
+                    <option value="CIVITANOVA">CIVITANOVA</option>
+                    <option value="PESARO">PESARO</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="clientCards">
+            <!-- I client cards verranno generati dinamicamente -->
+        </div>
+        
+        <button class="btn" id="addClientBtn">+ Aggiungi Cliente</button>
+        <button class="btn btn-secondary" id="sendReportBtn">Invia Report</button>
+    </div>
+
     <script>
-        function saveData() {
-            // In un'applicazione reale, qui ci sarebbe il codice per salvare i dati
-            alert("Dati salvati con successo!");
+        // Impostare la data corrente
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('it-IT');
+        document.getElementById('reportDate').textContent = `Data: ${formattedDate}`;
+        
+        // Numero iniziale di clienti e array per tenere traccia
+        let clientCount = 0;
+        const clientsContainer = document.getElementById('clientCards');
+        
+        // Funzione per aggiungere un nuovo cliente
+        function addClient() {
+            clientCount++;
+            
+            const clientCard = document.createElement('div');
+            clientCard.className = 'client-card';
+            clientCard.id = `client-${clientCount}`;
+            
+            clientCard.innerHTML = `
+                <div class="client-header">
+                    <div class="client-number">Cliente N° ${clientCount}</div>
+                    <button class="remove-btn" onclick="removeClient(${clientCount})">Rimuovi</button>
+                </div>
+                <div class="form-group">
+                    <label for="addetto-${clientCount}">ADDETTO:</label>
+                    <input type="text" id="addetto-${clientCount}" placeholder="Nome addetto">
+                </div>
+                <div class="form-group">
+                    <label for="reparto-${clientCount}">REPARTO/I:</label>
+                    <select id="reparto-${clientCount}">
+                        <option value="">-- Seleziona reparto --</option>
+                        <option value="ISOLA">ISOLA</option>
+                        <option value="INFORMATICA">INFORMATICA</option>
+                        <option value="BIANCO">BIANCO</option>
+                        <option value="CLIMA">CLIMA</option>
+                        <option value="PED">PED</option>
+                        <option value="TV">TV</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prodotto-${clientCount}">PRODOTTO:</label>
+                    <input type="text" id="prodotto-${clientCount}" placeholder="Prodotto">
+                </div>
+                <div class="form-group">
+                    <label>PROTOCOLLO:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="protocolloSi-${clientCount}" name="protocollo-${clientCount}" value="SI">
+                            <label for="protocolloSi-${clientCount}">SI</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="protocolloNo-${clientCount}" name="protocollo-${clientCount}" value="NO">
+                            <label for="protocolloNo-${clientCount}">NO</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>VENDITA:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="venditaSi-${clientCount}" name="vendita-${clientCount}" value="SI">
+                            <label for="venditaSi-${clientCount}">SI</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="venditaNo-${clientCount}" name="vendita-${clientCount}" value="NO">
+                            <label for="venditaNo-${clientCount}">NO</label>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            clientsContainer.appendChild(clientCard);
         }
+        
+        // Funzione per rimuovere un cliente
+        function removeClient(id) {
+            const clientCard = document.getElementById(`client-${id}`);
+            if (clientCard) {
+                clientCard.remove();
+            }
+        }
+        
+        // Funzione per inviare il report (via email)
+        function sendReport() {
+            const colleagueName = document.getElementById('colleagueName').value;
+            if (!colleagueName) {
+                alert('Seleziona il PUNTO VENDITA prima di inviare il report.');
+                return;
+            }
+            
+            let reportData = `REPORT PDV - ${formattedDate}\n`;
+            reportData += `PUNTO VENDITA: ${colleagueName}\n\n`;
+            
+            const clientCards = document.querySelectorAll('.client-card');
+            if (clientCards.length === 0) {
+                alert('Aggiungi almeno un cliente prima di inviare il report.');
+                return;
+            }
+            
+            // Contatori per il riepilogo
+            let totalClienti = 0;
+            let protocolloSiCount = 0;
+            let protocolloNoCount = 0;
+            let venditaSiCount = 0;
+            let venditaNoCount = 0;
+            
+            clientCards.forEach(card => {
+                const clientId = card.id.split('-')[1];
+                const addetto = document.getElementById(`addetto-${clientId}`).value;
+                const reparto = document.getElementById(`reparto-${clientId}`).value;
+                const prodotto = document.getElementById(`prodotto-${clientId}`).value;
+                
+                const protocolloSi = document.getElementById(`protocolloSi-${clientId}`).checked;
+                const protocollo = protocolloSi ? 'SI' : 'NO';
+                
+                const venditaSi = document.getElementById(`venditaSi-${clientId}`).checked;
+                const vendita = venditaSi ? 'SI' : 'NO';
+                
+                // Incrementa i contatori
+                totalClienti++;
+                if (protocolloSi) protocolloSiCount++; else protocolloNoCount++;
+                if (venditaSi) venditaSiCount++; else venditaNoCount++;
+                
+                reportData += `Cliente N° ${clientId}:\n`;
+                reportData += `- ADDETTO: ${addetto}\n`;
+                reportData += `- REPARTO/I: ${reparto}\n`;
+                reportData += `- PRODOTTO: ${prodotto}\n`;
+                reportData += `- PROTOCOLLO: ${protocollo}\n`;
+                reportData += `- VENDITA: ${vendita}\n\n`;
+            });
+            
+            // Aggiungi il riepilogo
+            reportData += `========== RIEPILOGO ==========\n`;
+            reportData += `TOTALE CLIENTI: ${totalClienti}\n`;
+            reportData += `PROTOCOLLO SI: ${protocolloSiCount}\n`;
+            reportData += `PROTOCOLLO NO: ${protocolloNoCount}\n`;
+            reportData += `VENDITE SI: ${venditaSiCount}\n`;
+            reportData += `VENDITE NO: ${venditaNoCount}\n`;
+            reportData += `===============================\n`;
+            
+            // Creare il link mailto per inviare l'email
+            const emailTo = "d.pavoni@dml-italia.com"; // Indirizzo email fisso
+            const subject = encodeURIComponent(`Report PDV - ${colleagueName} - ${formattedDate}`);
+            const body = encodeURIComponent(reportData);
+            const mailtoLink = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+            
+            // Aprire il client email predefinito
+            window.location.href = mailtoLink;
+        }
+        
+        // Event Listeners
+        document.getElementById('addClientBtn').addEventListener('click', addClient);
+        document.getElementById('sendReportBtn').addEventListener('click', sendReport);
+        
+        // Aggiungere automaticamente il primo cliente all'avvio
+        window.onload = function() {
+            addClient();
+        };
     </script>
 </body>
 </html>
