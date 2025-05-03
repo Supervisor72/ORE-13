@@ -3,294 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report PDV</title>
+    <title>Report Dati Ore 13</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 15px;
-        }
-        h1 {
-            text-align: center;
-            color: #0056b3;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
         .header {
-            background-color: #ffffff;
-            border-radius: 8px;
+            background-color: #003366;
+            color: white;
             padding: 15px;
+            text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        .client-card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .client-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
         }
-        .client-number {
+        .form-group label {
+            flex: 1;
             font-weight: bold;
-            font-size: 18px;
         }
-        .remove-btn {
-            background-color: #ff4d4d;
+        .form-group input, .form-group select {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .section-header {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            border-left: 4px solid #003366;
+        }
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .send-button {
+            background-color: #4CAF50;
             color: white;
+            padding: 12px 24px;
             border: none;
             border-radius: 4px;
-            padding: 5px 10px;
             cursor: pointer;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #0056b3;
-            color: white;
-            border: none;
-            border-radius: 4px;
             font-size: 16px;
-            cursor: pointer;
-            margin: 15px 0;
-            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
-        .btn-secondary {
-            background-color: #28a745;
+        .send-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
         }
-        .radio-group {
-            display: flex;
-            gap: 15px;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-        }
-        .radio-option input {
-            width: auto;
-            margin-right: 5px;
-        }
-        #reportDate {
+        .date {
+            text-align: right;
+            margin-bottom: 20px;
             font-weight: bold;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success-message {
+            display: none;
             text-align: center;
-            margin-bottom: 15px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-group input, .form-group select {
+                width: 100%;
+                margin-top: 5px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>REPORT PDV</h1>
-        <div id="reportDate"></div>
+    <div class="header">
+        <h1>Report Dati Ore 13</h1>
+    </div>
+    
+    <div class="form-container">
+        <div class="date">
+            Data: <span id="current-date"></span>
+        </div>
         
-        <div class="header">
+        <form id="report-form">
             <div class="form-group">
-                <label for="colleagueName">PUNTO VENDITA:</label>
-                <select id="colleagueName">
-                    <option value="">-- Seleziona punto vendita --</option>
-                    <option value="FANO">FANO</option>
-                    <option value="MONSANO">MONSANO</option>
-                    <option value="OSIMO">OSIMO</option>
-                    <option value="MACERATA">MACERATA</option>
-                    <option value="CIVITANOVA">CIVITANOVA</option>
-                    <option value="PESARO">PESARO</option>
+                <label for="punto-vendita">PUNTO VENDITA:</label>
+                <select id="punto-vendita" name="punto-vendita" required>
+                    <option value="" disabled selected>Seleziona punto vendita</option>
+                    <option value="Fano">Fano</option>
+                    <option value="Monsano">Monsano</option>
+                    <option value="Osimo">Osimo</option>
+                    <option value="Macerata">Macerata</option>
+                    <option value="Civitanova">Civitanova</option>
+                    <option value="Pesaro">Pesaro</option>
                 </select>
             </div>
-        </div>
+            
+            <div class="section-header">Dati Generali</div>
+            
+            <div class="form-group">
+                <label for="venduto">VENDUTO:</label>
+                <input type="number" id="venduto" name="venduto" placeholder="€" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="controcifra-giorno">CONTROCIFRA GIORNO:</label>
+                <input type="number" id="controcifra-giorno" name="controcifra-giorno" placeholder="€" required>
+            </div>
+            
+            <div class="section-header">Promozioni</div>
+            
+            <div class="form-group">
+                <label for="promo-3x2">PROMO 3X2:</label>
+                <input type="number" id="promo-3x2" name="promo-3x2" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="promo-50">PROMO -50:</label>
+                <input type="number" id="promo-50" name="promo-50" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="promo-alternative">PROMO ALTERNATIVE GIORNO:</label>
+                <input type="number" id="promo-alternative" name="promo-alternative" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="tasso-zero">TASSO ZERO:</label>
+                <input type="number" id="tasso-zero" name="tasso-zero" placeholder="0">
+            </div>
+            
+            <div class="section-header">POS e Garanzie</div>
+            
+            <div class="form-group">
+                <label for="pos-attach">POS CLASSIFICA ATTACH MESE (ATTACH):</label>
+                <input type="number" id="pos-attach" name="pos-attach" step="0.01" placeholder="%">
+            </div>
+            
+            <div class="form-group">
+                <label for="incidenza-garanzie">INCIDENZA GARANZIE MESE:</label>
+                <input type="number" id="incidenza-garanzie" name="incidenza-garanzie" step="0.01" placeholder="%">
+            </div>
+            
+            <div class="form-group">
+                <label for="iphone-garanzie">IPHONE / GARANZIE:</label>
+                <input type="number" id="iphone-garanzie" name="iphone-garanzie" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="apple-pc-garanzie">APPLE PC / GARANZIE:</label>
+                <input type="number" id="apple-pc-garanzie" name="apple-pc-garanzie" placeholder="0">
+            </div>
+            
+            <div class="section-header">Attivazioni</div>
+            
+            <div class="form-group">
+                <label for="attivazioni-ho">ATTIVAZIONI HO:</label>
+                <input type="number" id="attivazioni-ho" name="attivazioni-ho" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="attivazioni-very">ATTIVAZIONI VERY MOBILE:</label>
+                <input type="number" id="attivazioni-very" name="attivazioni-very" placeholder="0">
+            </div>
+            
+            <div class="section-header">Categorie Prodotti</div>
+            
+            <div class="form-group">
+                <label for="oled">OLED:</label>
+                <input type="number" id="oled" name="oled" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="aeg-bianco">AEG BIANCO:</label>
+                <input type="number" id="aeg-bianco" name="aeg-bianco" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="asciugatrici">ASCIUGATRICI:</label>
+                <input type="number" id="asciugatrici" name="asciugatrici" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="scope-no-fili">SCOPE NO FILI:</label>
+                <input type="number" id="scope-no-fili" name="scope-no-fili" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="i-robot">I-ROBOT:</label>
+                <input type="number" id="i-robot" name="i-robot" placeholder="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="caffe-automatiche">CAFFE' AUTOMATICHE:</label>
+                <input type="number" id="caffe-automatiche" name="caffe-automatiche" placeholder="0">
+            </div>
+
+            <div class="form-group">
+                <label for="email-mittente">TUA EMAIL (opzionale):</label>
+                <input type="email" id="email-mittente" name="email-mittente" placeholder="Email di chi compila">
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="send-button" onclick="sendEmail()">INVIA REPORT</button>
+            </div>
+        </form>
         
-        <div id="clientCards">
-            <!-- I client cards verranno generati dinamicamente -->
+        <div id="success-message" class="success-message">
+            Report inviato con successo! Grazie per la compilazione.
         </div>
-        
-        <button class="btn" id="addClientBtn">+ Aggiungi Cliente</button>
-        <button class="btn btn-secondary" id="sendReportBtn">Invia Report</button>
     </div>
 
     <script>
-        // Impostare la data corrente
-        const today = new Date();
-        const formattedDate = today.toLocaleDateString('it-IT');
-        document.getElementById('reportDate').textContent = `Data: ${formattedDate}`;
-        
-        // Numero iniziale di clienti e array per tenere traccia
-        let clientCount = 0;
-        const clientsContainer = document.getElementById('clientCards');
-        
-        // Funzione per aggiungere un nuovo cliente
-        function addClient() {
-            clientCount++;
+        // Imposta la data corrente
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            document.getElementById("current-date").textContent = `${day}/${month}/${year}`;
             
-            const clientCard = document.createElement('div');
-            clientCard.className = 'client-card';
-            clientCard.id = `client-${clientCount}`;
-            
-            clientCard.innerHTML = `
-                <div class="client-header">
-                    <div class="client-number">Cliente N° ${clientCount}</div>
-                    <button class="remove-btn" onclick="removeClient(${clientCount})">Rimuovi</button>
-                </div>
-                <div class="form-group">
-                    <label for="addetto-${clientCount}">ADDETTO:</label>
-                    <input type="text" id="addetto-${clientCount}" placeholder="Nome addetto">
-                </div>
-                <div class="form-group">
-                    <label for="reparto-${clientCount}">REPARTO/I:</label>
-                    <select id="reparto-${clientCount}">
-                        <option value="">-- Seleziona reparto --</option>
-                        <option value="ISOLA">ISOLA</option>
-                        <option value="INFORMATICA">INFORMATICA</option>
-                        <option value="BIANCO">BIANCO</option>
-                        <option value="CLIMA">CLIMA</option>
-                        <option value="PED">PED</option>
-                        <option value="TV">TV</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="prodotto-${clientCount}">PRODOTTO:</label>
-                    <input type="text" id="prodotto-${clientCount}" placeholder="Prodotto">
-                </div>
-                <div class="form-group">
-                    <label>PROTOCOLLO:</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="protocolloSi-${clientCount}" name="protocollo-${clientCount}" value="SI">
-                            <label for="protocolloSi-${clientCount}">SI</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="protocolloNo-${clientCount}" name="protocollo-${clientCount}" value="NO">
-                            <label for="protocolloNo-${clientCount}">NO</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>VENDITA:</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="venditaSi-${clientCount}" name="vendita-${clientCount}" value="SI">
-                            <label for="venditaSi-${clientCount}">SI</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="venditaNo-${clientCount}" name="vendita-${clientCount}" value="NO">
-                            <label for="venditaNo-${clientCount}">NO</label>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            clientsContainer.appendChild(clientCard);
-        }
-        
-        // Funzione per rimuovere un cliente
-        function removeClient(id) {
-            const clientCard = document.getElementById(`client-${id}`);
-            if (clientCard) {
-                clientCard.remove();
+            // Ripristina i valori dal localStorage se esistono
+            const savedPuntoVendita = localStorage.getItem("puntoVendita");
+            if (savedPuntoVendita) {
+                document.getElementById("punto-vendita").value = savedPuntoVendita;
             }
-        }
-        
-        // Funzione per inviare il report (via email)
-        function sendReport() {
-            const colleagueName = document.getElementById('colleagueName').value;
-            if (!colleagueName) {
-                alert('Seleziona il PUNTO VENDITA prima di inviare il report.');
+            
+            const savedEmail = localStorage.getItem("emailMittente");
+            if (savedEmail) {
+                document.getElementById("email-mittente").value = savedEmail;
+            }
+        });
+
+        // Funzione per inviare l'email
+        function sendEmail() {
+            const form = document.getElementById("report-form");
+            const puntoVendita = document.getElementById("punto-vendita").value;
+            const emailMittente = document.getElementById("email-mittente").value || "";
+            
+            if (!form.checkValidity()) {
+                alert("Per favore, compila tutti i campi obbligatori prima di inviare.");
                 return;
             }
             
-            let reportData = `REPORT PDV - ${formattedDate}\n`;
-            reportData += `PUNTO VENDITA: ${colleagueName}\n\n`;
-            
-            const clientCards = document.querySelectorAll('.client-card');
-            if (clientCards.length === 0) {
-                alert('Aggiungi almeno un cliente prima di inviare il report.');
-                return;
+            // Salva punto vendita e email nel localStorage
+            localStorage.setItem("puntoVendita", puntoVendita);
+            if (emailMittente) {
+                localStorage.setItem("emailMittente", emailMittente);
             }
             
-            // Contatori per il riepilogo
-            let totalClienti = 0;
-            let protocolloSiCount = 0;
-            let protocolloNoCount = 0;
-            let venditaSiCount = 0;
-            let venditaNoCount = 0;
-            
-            clientCards.forEach(card => {
-                const clientId = card.id.split('-')[1];
-                const addetto = document.getElementById(`addetto-${clientId}`).value;
-                const reparto = document.getElementById(`reparto-${clientId}`).value;
-                const prodotto = document.getElementById(`prodotto-${clientId}`).value;
-                
-                const protocolloSi = document.getElementById(`protocolloSi-${clientId}`).checked;
-                const protocollo = protocolloSi ? 'SI' : 'NO';
-                
-                const venditaSi = document.getElementById(`venditaSi-${clientId}`).checked;
-                const vendita = venditaSi ? 'SI' : 'NO';
-                
-                // Incrementa i contatori
-                totalClienti++;
-                if (protocolloSi) protocolloSiCount++; else protocolloNoCount++;
-                if (venditaSi) venditaSiCount++; else venditaNoCount++;
-                
-                reportData += `Cliente N° ${clientId}:\n`;
-                reportData += `- ADDETTO: ${addetto}\n`;
-                reportData += `- REPARTO/I: ${reparto}\n`;
-                reportData += `- PRODOTTO: ${prodotto}\n`;
-                reportData += `- PROTOCOLLO: ${protocollo}\n`;
-                reportData += `- VENDITA: ${vendita}\n\n`;
+            // Raccolta di tutti i dati del form
+            const datiForm = {};
+            const inputs = form.querySelectorAll("input, select");
+            inputs.forEach(input => {
+                if (input.id && input.id !== "" && input.id !== "email-mittente") {
+                    datiForm[input.id] = input.value || "0";
+                }
             });
             
-            // Aggiungi il riepilogo
-            reportData += `========== RIEPILOGO ==========\n`;
-            reportData += `TOTALE CLIENTI: ${totalClienti}\n`;
-            reportData += `PROTOCOLLO SI: ${protocolloSiCount}\n`;
-            reportData += `PROTOCOLLO NO: ${protocolloNoCount}\n`;
-            reportData += `VENDITE SI: ${venditaSiCount}\n`;
-            reportData += `VENDITE NO: ${venditaNoCount}\n`;
-            reportData += `===============================\n`;
+            const data = document.getElementById("current-date").textContent;
+            const subject = `Report Dati Ore 13 - ${puntoVendita} - ${data}`;
             
-            // Creare il link mailto per inviare l'email
-            const emailTo = "d.pavoni@dml-italia.com"; // Indirizzo email fisso
-            const subject = encodeURIComponent(`Report PDV - ${colleagueName} - ${formattedDate}`);
-            const body = encodeURIComponent(reportData);
-            const mailtoLink = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+            // Creazione del corpo dell'email ben formattato
+            let body = `
+REPORT DATI ORE 13 - ${puntoVendita} - ${data}
+------------------------------------------
+
+DATI GENERALI:
+- VENDUTO: €${datiForm["venduto"]}
+- CONTROCIFRA GIORNO: €${datiForm["controcifra-giorno"]}
+
+PROMOZIONI:
+- PROMO 3X2: ${datiForm["promo-3x2"]}
+- PROMO -50: ${datiForm["promo-50"]}
+- PROMO ALTERNATIVE GIORNO: ${datiForm["promo-alternative"]}
+- TASSO ZERO: ${datiForm["tasso-zero"]}
+
+POS E GARANZIE:
+- POS CLASSIFICA ATTACH MESE (ATTACH): ${datiForm["pos-attach"]}%
+- INCIDENZA GARANZIE MESE: ${datiForm["incidenza-garanzie"]}%
+- IPHONE / GARANZIE: ${datiForm["iphone-garanzie"]}
+- APPLE PC / GARANZIE: ${datiForm["apple-pc-garanzie"]}
+
+ATTIVAZIONI:
+- ATTIVAZIONI HO: ${datiForm["attivazioni-ho"]}
+- ATTIVAZIONI VERY MOBILE: ${datiForm["attivazioni-very"]}
+
+CATEGORIE PRODOTTI:
+- OLED: ${datiForm["oled"]}
+- AEG BIANCO: ${datiForm["aeg-bianco"]}
+- ASCIUGATRICI: ${datiForm["asciugatrici"]}
+- SCOPE NO FILI: ${datiForm["scope-no-fili"]}
+- I-ROBOT: ${datiForm["i-robot"]}
+- CAFFE' AUTOMATICHE: ${datiForm["caffe-automatiche"]}
+            `;
+
+            // Aggiunta dell'email del mittente, se presente
+            if (emailMittente) {
+                body += `\n\nInviato da: ${emailMittente}`;
+            }
             
-            // Aprire il client email predefinito
-            window.location.href = mailtoLink;
+            // Aggiungi un parametro CC per inviare una copia al mittente, se è stata inserita un'email
+            let mailtoLink = `mailto:d.pavoni@dml-italia.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            if (emailMittente) {
+                mailtoLink += `&cc=${encodeURIComponent(emailMittente)}`;
+            }
+            
+            // Mostra il messaggio di successo
+            document.getElementById("success-message").style.display = "block";
+            
+            // Apri il client email con i dati precompilati
+            setTimeout(function() {
+                window.location.href = mailtoLink;
+            }, 500);
         }
-        
-        // Event Listeners
-        document.getElementById('addClientBtn').addEventListener('click', addClient);
-        document.getElementById('sendReportBtn').addEventListener('click', sendReport);
-        
-        // Aggiungere automaticamente il primo cliente all'avvio
-        window.onload = function() {
-            addClient();
-        };
     </script>
 </body>
 </html>
