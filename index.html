@@ -89,11 +89,11 @@
       <input type="number" step="0.01" id="garanzie" required>
     </div>
 
-    <button onclick="inviaWhatsapp()">Invia Report via WhatsApp</button>
+    <button onclick="inviaTelegram()">Invia Report via Telegram</button>
   </div>
 
   <script>
-    function inviaWhatsapp() {
+    function inviaTelegram() {
       const get = id => document.getElementById(id)?.value?.trim();
 
       const pv = get('punto-vendita');
@@ -113,7 +113,7 @@
                 `• Posizione Classifica: ${classifica}\n` +
                 `• Incidenza Garanzie: ${garanzie}%`;
 
-      const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      const url = `https://t.me/tuo_username?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
     }
   </script>
