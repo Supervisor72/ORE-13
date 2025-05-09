@@ -146,26 +146,6 @@
             
             <div class="section-header">Promozioni</div>
             
-            <div class="form-group">
-                <label for="promo-3x2">PROMO 3X2:</label>
-                <input type="number" id="promo-3x2" name="promo-3x2" placeholder="0">
-            </div>
-            
-            <div class="form-group">
-                <label for="promo-50">PROMO -50:</label>
-                <input type="number" id="promo-50" name="promo-50" placeholder="0">
-            </div>
-            
-            <div class="form-group">
-                <label for="promo-alternative">PROMO ALTERNATIVE GIORNO:</label>
-                <input type="number" id="promo-alternative" name="promo-alternative" placeholder="0">
-            </div>
-            
-            <div class="form-group">
-                <label for="tasso-zero">TASSO ZERO:</label>
-                <input type="number" id="tasso-zero" name="tasso-zero" placeholder="0">
-            </div>
-            
             <div class="section-header"> Attach e Garanzie</div>
             
             <div class="form-group">
@@ -302,12 +282,6 @@ REPORT DATI ORE 13 - ${puntoVendita} - ${data}
 DATI GENERALI:
 - VENDUTO: €${datiForm["venduto"]}
 - CONTROCIFRA GIORNO: €${datiForm["controcifra-giorno"]}
-
-PROMOZIONI:
-- PROMO 3X2: ${datiForm["promo-3x2"] || "0"}
-- PROMO -50: ${datiForm["promo-50"] || "0"}
-- PROMO ALTERNATIVE GIORNO: ${datiForm["promo-alternative"] || "0"}
-- TASSO ZERO: ${datiForm["tasso-zero"] || "0"}
 
 POS E GARANZIE:
 - POS CLASSIFICA ATTACH MESE (ATTACH): ${datiForm["pos-attach"] || "0"}%
