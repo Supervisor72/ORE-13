@@ -127,10 +127,10 @@ function apriTelegram() {
   campi.forEach(([id, label]) => {
     const val = get(id);
     if (val) msg += label + ": " + val + "\n\n";
-  });
+  }); 
 
   const encoded = encodeURIComponent(msg);
-  window.open("https://t.me/+TZSgeIOvaQoc7nUb" + encoded, "_blank");
+  window.open("https://t.me/+TZSgeIOvaQoc7nUb");
 }
 </script>
 </body>
