@@ -124,8 +124,11 @@ Punto Vendita: ${pv}
 
 Dati Principali:
 - Venduto: €${venduto}
+
 - Controcifra Giorno: €${controcifra}
+
 - Posizione Classifica Attach Mese: ${classifica}
+
 - Incidenza Garanzie Mese: ${garanzie}%
 
 Dettagli Aggiuntivi:
@@ -148,7 +151,7 @@ Dettagli Aggiuntivi:
 
     extraFields.forEach(f => {
       const val = get(f.id) || 'Non compilato';
-      msg += `- ${f.label}: ${val} pezzi\n`;
+      msg += `- ${f.label}: ${val} pezzi\n\n`;  // Aggiunto doppio spazio tra le linee
     });
 
     const encodedMsg = encodeURIComponent(msg);
