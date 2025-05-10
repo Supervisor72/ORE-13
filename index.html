@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Report Ore 13</title>
   <style>
     body {
@@ -37,12 +37,9 @@
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 14px;
     }
     .submit-section {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+      text-align: center;
       margin-top: 30px;
     }
     button {
@@ -53,7 +50,6 @@
       font-size: 16px;
       border-radius: 4px;
       cursor: pointer;
-      width: 200px;
     }
     button:disabled {
       background-color: #aaa;
@@ -80,101 +76,89 @@
     </select>
   </div>
 
-  <div class="form-group"><label for="venduto">Venduto (€)</label><input type="number" id="venduto"></div>
-  <div class="form-group"><label for="controcifra">Controcifra Giorno (€)</label><input type="number" id="controcifra"></div>
-  <div class="form-group"><label for="classifica">Pos Classifica Attach Mese (Attach)</label><input type="number" id="classifica"></div>
-  <div class="form-group"><label for="garanzie">Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie"></div>
+  <div class="form-group"><label>Venduto (€)</label><input type="number" id="venduto" required></div>
+  <div class="form-group"><label>Controcifra Giorno (€)</label><input type="number" id="controcifra" required></div>
+  <div class="form-group"><label>Pos Classifica Attach Mese</label><input type="number" id="classifica" required></div>
+  <div class="form-group"><label>Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie" required></div>
 
-  <div class="form-group"><label for="iphone">iPhone (pezzi)</label><input type="number" id="iphone"></div>
-  <div class="form-group"><label for="garanzie-iphone">Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
-  <div class="form-group"><label for="apple-pc">Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
-  <div class="form-group"><label for="garanzie-apple-pc">Garanzie Apple PC (pezzi)</label><input type="number" id="garanzie-apple-pc"></div>
-  <div class="form-group"><label for="ho">Attivazioni Ho (pezzi)</label><input type="number" id="ho"></div>
-  <div class="form-group"><label for="very">Attivazioni Very Mobile (pezzi)</label><input type="number" id="very"></div>
-  <div class="form-group"><label for="oled">OLED (pezzi)</label><input type="number" id="oled"></div>
-  <div class="form-group"><label for="aeg">AEG Bianco (pezzi)</label><input type="number" id="aeg"></div>
-  <div class="form-group"><label for="asciugatrici">Asciugatrici (pezzi)</label><input type="number" id="asciugatrici"></div>
-  <div class="form-group"><label for="scope">Scope No Fili (pezzi)</label><input type="number" id="scope"></div>
-  <div class="form-group"><label for="irobot">iRobot (pezzi)</label><input type="number" id="irobot"></div>
-  <div class="form-group"><label for="caffe">Caffè Automatiche (pezzi)</label><input type="number" id="caffe"></div>
+  <div class="form-group"><label>iPhone (pezzi)</label><input type="number" id="iphone"></div>
+  <div class="form-group"><label>Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
+  <div class="form-group"><label>Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
+  <div class="form-group"><label>Garanzie Apple PC (pezzi)</label><input type="number" id="garanzie-apple-pc"></div>
+  <div class="form-group"><label>Attivazioni Ho (pezzi)</label><input type="number" id="ho"></div>
+  <div class="form-group"><label>Attivazioni Very Mobile (pezzi)</label><input type="number" id="very"></div>
+  <div class="form-group"><label>OLED (pezzi)</label><input type="number" id="oled"></div>
+  <div class="form-group"><label>AEG Bianco (pezzi)</label><input type="number" id="aeg"></div>
+  <div class="form-group"><label>Asciugatrici (pezzi)</label><input type="number" id="asciugatrici"></div>
+  <div class="form-group"><label>Scope No Fili (pezzi)</label><input type="number" id="scope"></div>
+  <div class="form-group"><label>iRobot (pezzi)</label><input type="number" id="irobot"></div>
+  <div class="form-group"><label>Caffè Automatiche (pezzi)</label><input type="number" id="caffe"></div>
 
   <div class="submit-section">
-    <button id="telegramBtn" onclick="inviaTelegram()" disabled>Invia su Telegram</button>
+    <button id="submitBtn" onclick="inviaTelegram()">Invia Report</button>
   </div>
 </div>
 
 <script>
   function inviaTelegram() {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = 'Invio in corso...';
+
     const get = id => document.getElementById(id)?.value?.trim();
 
     const pv = get('punto-vendita');
-    const venduto = get('venduto') || 'Non compilato';
-    const controcifra = get('controcifra') || 'Non compilato';
-    const classifica = get('classifica') || 'Non compilato';
-    const garanzie = get('garanzie') || 'Non compilato';
+    const venduto = get('venduto');
+    const controcifra = get('controcifra');
+    const classifica = get('classifica');
+    const garanzie = get('garanzie');
 
     if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
       alert('Compila i campi obbligatori.');
+      btn.disabled = false;
+      btn.innerText = 'Invia Report';
       return;
     }
 
-    let msg = `Dato Ore 13
+    let msg = `DATI ORE 13
 
-Punto Vendita: ${pv}
+* VENDUTO: €${venduto}
 
-Dati Principali:
-- Venduto: €${venduto}
+* CONTROCIFRA GIORNO: €${controcifra}
 
-- Controcifra Giorno: €${controcifra}
+* POS CLASSIFICA ATTACH MESE (ATTACH): ${classifica}
 
-- Posizione Classifica Attach Mese: ${classifica}
-
-- Incidenza Garanzie Mese: ${garanzie}%
-
-Dettagli Aggiuntivi:
-`;
+* INCIDENZA GARANZIE MESE (%): ${garanzie}%`;
 
     const extraFields = [
-      { id: 'iphone', label: 'iPhone' },
-      { id: 'garanzie-iphone', label: 'Garanzie iPhone' },
-      { id: 'apple-pc', label: 'Apple PC' },
-      { id: 'garanzie-apple-pc', label: 'Garanzie Apple PC' },
-      { id: 'ho', label: 'Attivazioni Ho' },
-      { id: 'very', label: 'Attivazioni Very Mobile' },
-      { id: 'oled', label: 'OLED' },
-      { id: 'aeg', label: 'AEG Bianco' },
-      { id: 'asciugatrici', label: 'Asciugatrici' },
-      { id: 'scope', label: 'Scope No Fili' },
-      { id: 'irobot', label: 'iRobot' },
-      { id: 'caffe', label: 'Caffè Automatiche' }
+      { id: 'iphone', label: '* IPHONE' },
+      { id: 'garanzie-iphone', label: '* GARANZIE IPHONE' },
+      { id: 'apple-pc', label: '* APPLE PC' },
+      { id: 'garanzie-apple-pc', label: '* GARANZIE APPLE PC' },
+      { id: 'ho', label: '* ATTIVAZIONI HO' },
+      { id: 'very', label: '* ATTIVAZIONI VERY MOBILE' },
+      { id: 'oled', label: '* OLED' },
+      { id: 'aeg', label: '* AEG BIANCO' },
+      { id: 'asciugatrici', label: '* ASCIUGATRICI' },
+      { id: 'scope', label: '* SCOPE NO FILI' },
+      { id: 'irobot', label: '* I-ROBOT' },
+      { id: 'caffe', label: '* CAFFE’ AUTOMATICHE' }
     ];
 
     extraFields.forEach(f => {
-      const val = get(f.id) || 'Non compilato';
-      msg += `- ${f.label}: ${val} pezzi\n\n`;  // Aggiunto doppio spazio tra le linee
+      const val = get(f.id);
+      msg += `
+
+${f.label}: ${val || 'N/A'}`;
     });
 
-    const encodedMsg = encodeURIComponent(msg);
-    const telegramUrl = `https://t.me/share/url?url=${encodedMsg}`;
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(msg)}`;
 
-    // Apre Telegram con il messaggio precompilato
     window.open(telegramUrl, '_blank');
+
+    btn.innerText = 'Invio completato ✅';
+    btn.disabled = false;
   }
-
-  function enableTelegramButton() {
-    const isValid = document.getElementById('punto-vendita').value &&
-                    document.getElementById('venduto').value &&
-                    document.getElementById('controcifra').value &&
-                    document.getElementById('classifica').value &&
-                    document.getElementById('garanzie').value;
-
-    document.getElementById('telegramBtn').disabled = !isValid;
-  }
-
-  // Aggiungi listener per abilitare il bottone di invio su Telegram
-  document.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('input', enableTelegramButton);
-  });
 </script>
 </body>
 </html>
