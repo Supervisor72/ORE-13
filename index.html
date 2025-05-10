@@ -1,97 +1,188 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Invio Dati</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Ore 13</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
     }
-    label {
-      font-weight: bold;
-      display: block;
-      margin: 20px 0 5px;
-    }
-    select, input, textarea {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      border: 1px solid #ccc;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 25px;
       border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
       margin-bottom: 25px;
     }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    input[type="number"], select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .submit-section {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
     button {
-      padding: 15px 25px;
-      font-size: 18px;
-      margin-right: 15px;
-      cursor: pointer;
+      background-color: #007bff;
+      color: white;
       border: none;
-      border-radius: 8px;
-      color: #fff;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 200px;
     }
-    #sendTelegram {
-      background-color: #0088cc;
+    button:disabled {
+      background-color: #aaa;
     }
-    #sendWhatsApp {
-      background-color: #25d366;
+    button:hover:not(:disabled) {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+<div class="container">
+  <h1>Report Ore 13</h1>
 
-  <h1>DATO ORE 13</h1>
-
-  <form id="dataForm">
-    <label for="puntoVendita">Punto Vendita</label>
-    <select id="puntoVendita" name="puntoVendita" required>
-      <option value="">Seleziona...</option>
-      <option value="Fano">Fano</option>
-      <option value="Monsano">Monsano</option>
-      <option value="Osimo">Osimo</option>
-      <option value="Macerata">Macerata</option>
-      <option value="Civitanova">Civitanova</option>
-      <option value="Pesaro">Pesaro</option>
+  <div class="form-group">
+    <label for="punto-vendita">Punto Vendita</label>
+    <select id="punto-vendita" required>
+      <option value="">Seleziona punto vendita</option>
+      <option value="FANO">FANO</option>
+      <option value="MONSANO">MONSANO</option>
+      <option value="OSIMO">OSIMO</option>
+      <option value="MACERATA">MACERATA</option>
+      <option value="CIVITANOVA">CIVITANOVA</option>
+      <option value="PESARO">PESARO</option>
     </select>
+  </div>
 
-    <label for="campo1">TV vendute</label>
-    <input type="text" id="campo1" name="campo1">
+  <div class="form-group"><label for="venduto">Venduto (€)</label><input type="number" id="venduto" required></div>
+  <div class="form-group"><label for="controcifra">Controcifra Giorno (€)</label><input type="number" id="controcifra" required></div>
+  <div class="form-group"><label for="classifica">Pos Classifica Attach Mese (Attach)</label><input type="number" id="classifica" required></div>
+  <div class="form-group"><label for="garanzie">Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie" required></div>
 
-    <label for="campo2">Frigoriferi venduti</label>
-    <input type="text" id="campo2" name="campo2">
+  <div class="form-group"><label for="iphone">iPhone (pezzi)</label><input type="number" id="iphone"></div>
+  <div class="form-group"><label for="garanzie-iphone">Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
+  <div class="form-group"><label for="apple-pc">Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
+  <div class="form-group"><label for="garanzie-apple-pc">Garanzie Apple PC (pezzi)</label><input type="number" id="garanzie-apple-pc"></div>
+  <div class="form-group"><label for="ho">Attivazioni Ho (pezzi)</label><input type="number" id="ho"></div>
+  <div class="form-group"><label for="very">Attivazioni Very Mobile (pezzi)</label><input type="number" id="very"></div>
+  <div class="form-group"><label for="oled">OLED (pezzi)</label><input type="number" id="oled"></div>
+  <div class="form-group"><label for="aeg">AEG Bianco (pezzi)</label><input type="number" id="aeg"></div>
+  <div class="form-group"><label for="asciugatrici">Asciugatrici (pezzi)</label><input type="number" id="asciugatrici"></div>
+  <div class="form-group"><label for="scope">Scope No Fili (pezzi)</label><input type="number" id="scope"></div>
+  <div class="form-group"><label for="irobot">iRobot (pezzi)</label><input type="number" id="irobot"></div>
+  <div class="form-group"><label for="caffe">Caffè Automatiche (pezzi)</label><input type="number" id="caffe"></div>
 
-    <label for="campo3">Lavatrici vendute</label>
-    <input type="text" id="campo3" name="campo3">
+  <div class="submit-section">
+    <button id="submitBtn" onclick="preparaMessaggio()">Prepara Messaggio</button>
+    <button id="whatsappBtn" onclick="inviaWhatsapp()" disabled>Invia su WhatsApp</button>
+    <button id="telegramBtn" onclick="inviaTelegram()" disabled>Invia su Telegram</button>
+  </div>
+</div>
 
-    <label for="campo4">Incassi Totali (€)</label>
-    <input type="text" id="campo4" name="campo4">
+<script>
+  function preparaMessaggio() {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = 'Preparando...';
 
-    <button type="button" id="sendTelegram">Invia su Telegram</button>
-    <button type="button" id="sendWhatsApp">Invia su WhatsApp</button>
-  </form>
+    const get = id => document.getElementById(id)?.value?.trim();
 
-  <script>
-    function generateMessage() {
-      const pv = document.getElementById('puntoVendita').value;
-      const c1 = document.getElementById('campo1').value;
-      const c2 = document.getElementById('campo2').value;
-      const c3 = document.getElementById('campo3').value;
-      const c4 = document.getElementById('campo4').value;
+    const pv = get('punto-vendita');
+    const venduto = get('venduto');
+    const controcifra = get('controcifra');
+    const classifica = get('classifica');
+    const garanzie = get('garanzie');
 
-      return `DATO ORE 13\n\nPunto vendita: ${pv}\n\n• TV vendute: ${c1}\n\n• Frigoriferi venduti: ${c2}\n\n• Lavatrici vendute: ${c3}\n\n• Incassi Totali (€): ${c4}`;
+    if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
+      alert('Compila i campi obbligatori.');
+      btn.disabled = false;
+      btn.innerText = 'Prepara Messaggio';
+      return;
     }
 
-    document.getElementById('sendTelegram').addEventListener('click', function() {
-      const msg = encodeURIComponent(generateMessage());
-      window.open(`https://t.me/share/url?url=&text=${msg}`, '_blank');
+    let msg = `Dato Ore 13
+
+Punto Vendita: ${pv}
+
+Dati Principali:
+- Venduto: €${venduto}
+- Controcifra Giorno: €${controcifra}
+- Posizione Classifica Attach Mese: ${classifica}
+- Incidenza Garanzie Mese: ${garanzie}%
+
+Dettagli Aggiuntivi:
+`;
+
+    const extraFields = [
+      { id: 'iphone', label: 'iPhone' },
+      { id: 'garanzie-iphone', label: 'Garanzie iPhone' },
+      { id: 'apple-pc', label: 'Apple PC' },
+      { id: 'garanzie-apple-pc', label: 'Garanzie Apple PC' },
+      { id: 'ho', label: 'Attivazioni Ho' },
+      { id: 'very', label: 'Attivazioni Very Mobile' },
+      { id: 'oled', label: 'OLED' },
+      { id: 'aeg', label: 'AEG Bianco' },
+      { id: 'asciugatrici', label: 'Asciugatrici' },
+      { id: 'scope', label: 'Scope No Fili' },
+      { id: 'irobot', label: 'iRobot' },
+      { id: 'caffe', label: 'Caffè Automatiche' }
+    ];
+
+    extraFields.forEach(f => {
+      const val = get(f.id);
+      if (val) msg += `- ${f.label}: ${val} pezzi\n`;
     });
 
-    document.getElementById('sendWhatsApp').addEventListener('click', function() {
-      const msg = encodeURIComponent(generateMessage());
-      window.open(`https://wa.me/?text=${msg}`, '_blank');
-    });
-  </script>
+    // Creare il link per WhatsApp e Telegram
+    const encodedMsg = encodeURIComponent(msg);
+    const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
+    const telegramUrl = `https://t.me/share/url?url=${encodedMsg}`;
+
+    // Attivare i bottoni per inviare
+    document.getElementById('whatsappBtn').disabled = false;
+    document.getElementById('telegramBtn').disabled = false;
+    document.getElementById('whatsappBtn').setAttribute('data-url', whatsappUrl);
+    document.getElementById('telegramBtn').setAttribute('data-url', telegramUrl);
+
+    btn.disabled = false;
+    btn.innerText = 'Prepara Messaggio';
+  }
+
+  function inviaWhatsapp() {
+    const url = document.getElementById('whatsappBtn').getAttribute('data-url');
+    window.open(url, '_blank');
+  }
+
+  function inviaTelegram() {
+    const url = document.getElementById('telegramBtn').getAttribute('data-url');
+    window.open(url, '_blank');
+  }
+</script>
 </body>
 </html>
