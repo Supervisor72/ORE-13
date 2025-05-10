@@ -99,18 +99,12 @@
   <div class="form-group"><label for="caffe">Caffè Automatiche (pezzi)</label><input type="number" id="caffe"></div>
 
   <div class="submit-section">
-    <button id="submitBtn" onclick="preparaMessaggio()">Prepara Messaggio</button>
-    <button id="whatsappBtn" onclick="inviaWhatsapp()" disabled>Invia su WhatsApp</button>
     <button id="telegramBtn" onclick="inviaTelegram()" disabled>Invia su Telegram</button>
   </div>
 </div>
 
 <script>
-  function preparaMessaggio() {
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.innerText = 'Preparando...';
-
+  function inviaTelegram() {
     const get = id => document.getElementById(id)?.value?.trim();
 
     const pv = get('punto-vendita');
@@ -121,8 +115,6 @@
 
     if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
       alert('Compila i campi obbligatori.');
-      btn.disabled = false;
-      btn.innerText = 'Prepara Messaggio';
       return;
     }
 
@@ -159,30 +151,27 @@ Dettagli Aggiuntivi:
       msg += `- ${f.label}: ${val} pezzi\n`;
     });
 
-    // Creare il link per WhatsApp e Telegram
     const encodedMsg = encodeURIComponent(msg);
-    const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
     const telegramUrl = `https://t.me/share/url?url=${encodedMsg}`;
 
-    // Attivare i bottoni per inviare
-    document.getElementById('whatsappBtn').disabled = false;
-    document.getElementById('telegramBtn').disabled = false;
-    document.getElementById('whatsappBtn').setAttribute('data-url', whatsappUrl);
-    document.getElementById('telegramBtn').setAttribute('data-url', telegramUrl);
-
-    btn.disabled = false;
-    btn.innerText = 'Prepara Messaggio';
+    // Apre Telegram con il messaggio precompilato
+    window.open(telegramUrl, '_blank');
   }
 
-  function inviaWhatsapp() {
-    const url = document.getElementById('whatsappBtn').getAttribute('data-url');
-    window.open(url, '_blank');
+  function enableTelegramButton() {
+    const isValid = document.getElementById('punto-vendita').value &&
+                    document.getElementById('venduto').value &&
+                    document.getElementById('controcifra').value &&
+                    document.getElementById('classifica').value &&
+                    document.getElementById('garanzie').value;
+
+    document.getElementById('telegramBtn').disabled = !isValid;
   }
 
-  function inviaTelegram() {
-    const url = document.getElementById('telegramBtn').getAttribute('data-url');
-    window.open(url, '_blank');
-  }
+  // Aggiungi listener per abilitare il bottone di invio su Telegram
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', enableTelegramButton);
+  });
 </script>
 </body>
-</html> 
+</html>
